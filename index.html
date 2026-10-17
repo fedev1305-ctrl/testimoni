@@ -1,1671 +1,622 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="id">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dwi Ramadhan — Public & Research Analyst</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-    <style>
-      :root {
-        --bg: #f4faf6;
-        --surface: #ffffff;
-        --surface-2: #eef8f1;
-        --border: #d5eade;
-        --text: #062018;
-        --muted: #4f6b5e;
-        --green-1: #064e3b;
-        --green-2: #065f46;
-        --green-3: #047857;
-        --green-4: #059669;
-        --green-5: #10b981;
-        --green-soft: #dff5e8;
-        --teal: #14b8a6;
-        --lime: #84cc16;
-        --grad: linear-gradient(135deg, #064e3b 0%, #047857 45%, #10b981 100%);
-        --grad-2: linear-gradient(135deg, #065f46 0%, #059669 50%, #14b8a6 100%);
-        --grad-soft: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
-        --shadow: 0 30px 60px -30px rgba(4, 120, 87, 0.45);
-      }
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      body {
-        background: var(--bg);
-        color: var(--text);
-        font-family: "Inter", sans-serif;
-        line-height: 1.6;
-        overflow-x: hidden;
-        -webkit-font-smoothing: antialiased;
-      }
-      a {
-        color: inherit;
-        text-decoration: none;
-      }
-      img {
-        max-width: 100%;
-        display: block;
-      }
-      .container {
-        max-width: 1180px;
-        margin: 0 auto;
-        padding: 0 24px;
-      }
-      .mono {
-        font-family: "JetBrains Mono", monospace;
-      }
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ResepKu — Resep Makanan Sederhana</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+  :root{
+    --green-900:#0f3d2e;
+    --green-700:#1b6b4f;
+    --green-500:#2e9e6b;
+    --green-300:#7ed3a6;
+    --green-100:#e8f7ef;
+  }
+  body{font-family:'Segoe UI',system-ui,sans-serif;background:#fbfdfb;color:#1f2d27;}
+  .navbar{background:rgba(15,61,46,.96);backdrop-filter:blur(8px);}
+  .navbar .nav-link{color:#cfeee0!important;font-weight:500;}
+  .navbar .nav-link:hover,.navbar .nav-link.active{color:#fff!important;}
+  .navbar-brand{font-weight:800;letter-spacing:.5px;color:#fff!important;}
+  .navbar-brand span{color:var(--green-300);}
+  .hero{
+    background:linear-gradient(135deg,var(--green-900) 0%,var(--green-700) 55%,var(--green-500) 100%);
+    color:#fff;border-radius:0 0 40px 40px;position:relative;overflow:hidden;
+  }
+  .hero::after{
+    content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;
+    background:radial-gradient(circle,rgba(126,211,166,.35),transparent 65%);border-radius:50%;
+  }
+  .hero .badge-soft{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.25);color:#eafff3;}
+  .btn-green{background:var(--green-500);border-color:var(--green-500);color:#fff;font-weight:600;}
+  .btn-green:hover{background:var(--green-700);border-color:var(--green-700);color:#fff;}
+  .btn-outline-green{border:2px solid var(--green-500);color:var(--green-700);font-weight:600;}
+  .btn-outline-green:hover{background:var(--green-500);color:#fff;}
+  .card-resep{border:none;border-radius:20px;overflow:hidden;transition:.25s;box-shadow:0 6px 20px rgba(15,61,46,.08);height:100%;}
+  .card-resep:hover{transform:translateY(-6px);box-shadow:0 16px 34px rgba(15,61,46,.18);}
+  .card-resep img{height:190px;object-fit:cover;transition:.35s;}
+  .card-resep:hover img{transform:scale(1.06);}
+  .thumb-wrap{overflow:hidden;}
+  .tag{background:var(--green-100);color:var(--green-700);font-weight:600;border-radius:50px;font-size:.75rem;padding:.35rem .7rem;}
+  .meta{font-size:.85rem;color:#6b7f76;}
+  .section-title{font-weight:800;color:var(--green-900);}
+  .section-title:after{content:"";display:block;width:56px;height:4px;background:var(--green-500);border-radius:4px;margin-top:10px;}
+  .step-num{width:38px;height:38px;flex:none;border-radius:50%;background:var(--green-100);color:var(--green-700);font-weight:800;display:flex;align-items:center;justify-content:center;}
+  .kategori-pill{background:#fff;border:1px solid #e3efe8;border-radius:50px;padding:.55rem 1.1rem;font-weight:600;color:var(--green-700);transition:.2s;}
+  .kategori-pill:hover{background:var(--green-500);color:#fff;border-color:var(--green-500);}
+  .cta{background:linear-gradient(135deg,var(--green-700),var(--green-500));border-radius:28px;color:#fff;}
+  footer{background:var(--green-900);color:#b9d9cb;}
+  footer a{color:#d7efe3;text-decoration:none;}
+  footer a:hover{color:#fff;}
+  .filter-btn{background:#fff;border:1px solid #e3efe8;color:var(--green-700);font-weight:600;border-radius:50px;}
+  .filter-btn.active,.filter-btn:hover{background:var(--green-500);color:#fff;border-color:var(--green-500);}
 
-      .bg-blobs {
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        overflow: hidden;
-        pointer-events: none;
-      }
-      .blob {
-        position: absolute;
-        border-radius: 50%;
-        filter: blur(90px);
-        opacity: 0.55;
-        animation: float 16s ease-in-out infinite;
-      }
-      .blob.b1 {
-        width: 460px;
-        height: 460px;
-        background: #a7f3d0;
-        top: -120px;
-        left: -100px;
-      }
-      .blob.b2 {
-        width: 380px;
-        height: 380px;
-        background: #6ee7b7;
-        top: 45%;
-        right: -120px;
-        animation-delay: -5s;
-      }
-      .blob.b3 {
-        width: 340px;
-        height: 340px;
-        background: #99f6e4;
-        bottom: -80px;
-        left: 35%;
-        animation-delay: -10s;
-      }
-      @keyframes float {
-        0%,
-        100% {
-          transform: translate(0, 0) scale(1);
-        }
-        50% {
-          transform: translate(40px, -50px) scale(1.1);
-        }
-      }
-      .bg-grid {
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        pointer-events: none;
-        opacity: 0.45;
-        background-image: linear-gradient(rgba(4, 120, 87, 0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(4, 120, 87, 0.08) 1px, transparent 1px);
-        background-size: 48px 48px;
-        mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 70%);
-        -webkit-mask-image: radial-gradient(circle at 50% 30%, #000 0%, transparent 70%);
-      }
+  /* ===== MODAL DETAIL RESEP ===== */
+  .modal-resep .modal-content{border:none;border-radius:24px;overflow:hidden;}
+  .modal-resep .modal-header{
+    background:linear-gradient(135deg,var(--green-900),var(--green-700));
+    color:#fff;border:none;padding:1.1rem 1.5rem;
+  }
+  .modal-resep .modal-header .btn-close{filter:invert(1);opacity:.85;}
+  .modal-resep .modal-body{padding:0;}
+  .detail-img{width:100%;height:260px;object-fit:cover;}
+  .info-pill{background:#fff;border:1px solid #e3efe8;border-radius:14px;padding:.7rem .4rem;text-align:center;}
+  .info-pill i{color:var(--green-500);font-size:1.25rem;}
+  .info-pill .label{font-size:.66rem;text-transform:uppercase;letter-spacing:.5px;color:#8aa398;font-weight:700;}
+  .info-pill .value{font-weight:800;color:var(--green-900);font-size:.95rem;}
+  .bahan-item{display:flex;align-items:center;gap:.6rem;padding:.55rem 0;border-bottom:1px dashed #e3efe8;font-size:.92rem;}
+  .bahan-item:last-child{border-bottom:none;}
+  .bahan-item .dot{width:8px;height:8px;border-radius:50%;background:var(--green-500);flex:none;}
+  .step-card{background:#fff;border:1px solid #eef5f1;border-radius:14px;padding:1rem;display:flex;gap:.9rem;transition:.2s;}
+  .step-card:hover{border-color:var(--green-300);box-shadow:0 8px 22px rgba(15,61,46,.08);}
+  .step-card .step-num{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--green-700),var(--green-500));color:#fff;font-size:1rem;}
+  .detail-title{font-weight:800;color:var(--green-900);}
+  .rating-star{color:#f5b301;}
+  .nutrisi-box{background:var(--green-100);border-radius:16px;padding:1rem;}
+  .nutrisi-box .n-val{font-weight:800;color:var(--green-900);font-size:1.05rem;}
+  .nutrisi-box .n-lbl{font-size:.72rem;color:#6b7f76;}
+  .tips-box{background:var(--green-100);border-radius:16px;padding:1rem 1.25rem;}
+  .detail-scroll{max-height:calc(100vh - 220px);overflow-y:auto;padding:1.5rem;}
+  .detail-scroll::-webkit-scrollbar{width:8px;}
+  .detail-scroll::-webkit-scrollbar-thumb{background:#cfe6da;border-radius:8px;}
+</style>
+</head>
+<body>
 
-      nav {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        z-index: 100;
-        padding: 20px 0;
-        background: rgba(244, 250, 246, 0.7);
-        backdrop-filter: blur(16px);
-        border-bottom: 1px solid transparent;
-        transition: all 0.3s ease;
-      }
-      nav.scrolled {
-        border-bottom-color: var(--border);
-        padding: 14px 0;
-        background: rgba(244, 250, 246, 0.95);
-      }
-      .nav-inner {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .logo {
-        font-family: "Space Grotesk", sans-serif;
-        font-weight: 700;
-        font-size: 18px;
-        letter-spacing: -0.5px;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-      }
-      .logo-mark {
-        width: 30px;
-        height: 30px;
-        border-radius: 9px;
-        background: var(--grad);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-size: 12px;
-        font-weight: 700;
-        font-family: "JetBrains Mono", monospace;
-        background-size: 200% 200%;
-        animation: gradientShift 5s ease infinite;
-        box-shadow: 0 8px 20px -8px var(--green-3);
-      }
-      @keyframes gradientShift {
-        0%,
-        100% {
-          background-position: 0% 50%;
-        }
-        50% {
-          background-position: 100% 50%;
-        }
-      }
-      .logo span {
-        background: var(--grad);
-        background-size: 200% 200%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        animation: gradientShift 5s ease infinite;
-      }
-      .nav-links {
-        display: flex;
-        gap: 30px;
-        font-size: 14px;
-        color: var(--muted);
-      }
-      .nav-links a {
-        transition: color 0.3s ease;
-        position: relative;
-      }
-      .nav-links a::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -6px;
-        height: 2px;
-        width: 0;
-        background: var(--grad);
-        transition: width 0.3s ease;
-        border-radius: 2px;
-      }
-      .nav-links a:hover {
-        color: var(--green-3);
-      }
-      .nav-links a:hover::after {
-        width: 100%;
-      }
-
-      .hero {
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        padding-top: 80px;
-        position: relative;
-      }
-      .hero-grid {
-        display: grid;
-        grid-template-columns: 1.15fr 1fr;
-        gap: 70px;
-        align-items: center;
-      }
-      .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 14px;
-        border: 1px solid var(--border);
-        border-radius: 999px;
-        font-size: 12px;
-        color: var(--green-3);
-        margin-bottom: 26px;
-        background: var(--surface);
-        font-weight: 500;
-        animation: badgePulse 2.4s ease-in-out infinite;
-      }
-      @keyframes badgePulse {
-        0%,
-        100% {
-          box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.25);
-        }
-        50% {
-          box-shadow: 0 0 0 10px rgba(5, 150, 105, 0);
-        }
-      }
-      .badge .dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: #22c55e;
-        box-shadow: 0 0 8px #22c55e;
-        animation: blink 1.6s ease-in-out infinite;
-      }
-      @keyframes blink {
-        50% {
-          opacity: 0.3;
-        }
-      }
-
-      .hero h1 {
-        font-family: "Space Grotesk", sans-serif;
-        font-size: clamp(38px, 5.6vw, 64px);
-        font-weight: 700;
-        line-height: 1.05;
-        letter-spacing: -2px;
-        margin-bottom: 18px;
-      }
-      .hero h1 .grad {
-        background: var(--grad);
-        background-size: 200% 200%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        animation: gradientShift 6s ease infinite;
-      }
-      .typed {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 15px;
-        color: var(--green-3);
-        margin-bottom: 22px;
-        display: block;
-        height: 24px;
-      }
-      .typed .cursor {
-        display: inline-block;
-        width: 8px;
-        height: 16px;
-        background: var(--green-3);
-        margin-left: 3px;
-        vertical-align: middle;
-        animation: blink 0.8s infinite;
-      }
-      .hero p.lead {
-        color: var(--muted);
-        font-size: 16.5px;
-        max-width: 500px;
-        margin-bottom: 34px;
-      }
-      .cta-group {
-        display: flex;
-        gap: 14px;
-        flex-wrap: wrap;
-      }
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 13px 26px;
-        border-radius: 12px;
-        font-size: 14px;
-        font-weight: 500;
-        transition: all 0.35s cubic-bezier(0.19, 1, 0.22, 1);
-        cursor: pointer;
-        border: 1px solid transparent;
-        position: relative;
-        overflow: hidden;
-      }
-      .btn-primary {
-        background: var(--grad);
-        background-size: 200% 200%;
-        color: #fff;
-        box-shadow: 0 10px 26px -10px var(--green-3);
-        animation: gradientShift 5s ease infinite;
-      }
-      .btn-primary:hover {
-        transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 18px 36px -12px var(--green-3);
-      }
-      .btn-primary::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.5) 50%, transparent 70%);
-        transform: translateX(-100%);
-        transition: transform 0.7s ease;
-      }
-      .btn-primary:hover::before {
-        transform: translateX(100%);
-      }
-      .btn-ghost {
-        border-color: var(--border);
-        color: var(--text);
-        background: var(--surface);
-      }
-      .btn-ghost:hover {
-        border-color: var(--green-3);
-        color: var(--green-3);
-        transform: translateY(-3px);
-        box-shadow: 0 12px 24px -12px var(--green-3);
-      }
-
-      .avatar-wrap {
-        position: relative;
-        display: flex;
-        justify-content: center;
-        perspective: 1200px;
-      }
-      .terminal {
-        width: 100%;
-        max-width: 440px;
-        border-radius: 16px;
-        overflow: hidden;
-        background: #04231a;
-        border: 1px solid #0a3a2b;
-        box-shadow:
-          0 40px 80px -40px rgba(4, 120, 87, 0.65),
-          0 0 0 1px rgba(255, 255, 255, 0.03);
-        font-family: "JetBrains Mono", monospace;
-        font-size: 12.5px;
-        animation: floatTerminal 6s ease-in-out infinite;
-        transform-style: preserve-3d;
-      }
-      @keyframes floatTerminal {
-        0%,
-        100% {
-          transform: translateY(0) rotateY(0);
-        }
-        50% {
-          transform: translateY(-12px) rotateY(3deg);
-        }
-      }
-      .terminal-bar {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        padding: 12px 16px;
-        background: #052e22;
-        border-bottom: 1px solid #0a3a2b;
-      }
-      .terminal-bar .dot {
-        width: 11px;
-        height: 11px;
-        border-radius: 50%;
-      }
-      .dot.red {
-        background: #ef4444;
-      }
-      .dot.yellow {
-        background: #f59e0b;
-      }
-      .dot.green {
-        background: #22c55e;
-      }
-      .terminal-bar .title {
-        margin-left: auto;
-        color: #5b8577;
-        font-size: 11px;
-        letter-spacing: 0.5px;
-      }
-      .terminal-body {
-        padding: 20px;
-        color: #c5e6d8;
-        line-height: 1.8;
-      }
-      .term-line {
-        opacity: 0;
-        transform: translateX(-8px);
-        animation: termIn 0.4s forwards;
-      }
-      .term-line:nth-child(1) {
-        animation-delay: 0.2s;
-      }
-      .term-line:nth-child(2) {
-        animation-delay: 0.6s;
-      }
-      .term-line:nth-child(3) {
-        animation-delay: 1s;
-      }
-      .term-line:nth-child(4) {
-        animation-delay: 1.4s;
-      }
-      .term-line:nth-child(5) {
-        animation-delay: 1.8s;
-      }
-      .term-line:nth-child(6) {
-        animation-delay: 2.2s;
-      }
-      .term-line:nth-child(7) {
-        animation-delay: 2.6s;
-      }
-      @keyframes termIn {
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-      .prompt {
-        color: #10b981;
-      }
-      .cmd {
-        color: #e2f5ec;
-      }
-      .flag {
-        color: #34d399;
-      }
-      .str {
-        color: #fbbf24;
-      }
-      .cmt {
-        color: #5b8577;
-      }
-      .key {
-        color: #a7f3d0;
-      }
-      .num {
-        color: #fb7185;
-      }
-
-      .float-card {
-        position: absolute;
-        bottom: -18px;
-        left: -14px;
-        background: var(--surface);
-        border: 1px solid var(--border);
-        padding: 12px 18px;
-        border-radius: 14px;
-        font-size: 12px;
-        color: var(--muted);
-        box-shadow: var(--shadow);
-        animation: floatTerminal 5s ease-in-out infinite reverse;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .float-card .ic {
-        width: 34px;
-        height: 34px;
-        border-radius: 9px;
-        background: var(--grad);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-size: 13px;
-        font-weight: 700;
-        font-family: "JetBrains Mono", monospace;
-        background-size: 200% 200%;
-        animation: gradientShift 4s ease infinite;
-      }
-      .float-card strong {
-        color: var(--text);
-        display: block;
-        font-size: 13px;
-      }
-
-      section {
-        padding: 120px 0;
-      }
-      .section-head {
-        margin-bottom: 64px;
-        max-width: 640px;
-      }
-      .section-tag {
-        font-size: 12px;
-        color: var(--green-3);
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-weight: 600;
-        margin-bottom: 12px;
-        display: block;
-        font-family: "JetBrains Mono", monospace;
-      }
-      .section-title {
-        font-family: "Space Grotesk", sans-serif;
-        font-size: clamp(28px, 4vw, 42px);
-        font-weight: 700;
-        letter-spacing: -1px;
-        line-height: 1.15;
-      }
-
-      .about-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 60px;
-      }
-      .about-grid p {
-        color: var(--muted);
-        margin-bottom: 18px;
-      }
-      .about-stats {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 16px;
-        margin-top: 32px;
-      }
-      .stat {
-        padding: 18px;
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        background: var(--surface);
-        transition: all 0.3s ease;
-      }
-      .stat:hover {
-        border-color: var(--green-3);
-        transform: translateY(-3px);
-        box-shadow: 0 16px 32px -20px var(--green-3);
-      }
-      .stat .num {
-        font-family: "Space Grotesk", sans-serif;
-        font-size: 24px;
-        font-weight: 700;
-        background: var(--grad);
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-      }
-      .stat span {
-        font-size: 12px;
-        color: var(--muted);
-      }
-
-      .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 40px 60px;
-      }
-      .skill-item {
-        margin-bottom: 8px;
-      }
-      .skill-top {
-        display: flex;
-        justify-content: space-between;
-        font-size: 14px;
-        margin-bottom: 10px;
-        font-family: "JetBrains Mono", monospace;
-      }
-      .skill-top span:last-child {
-        color: var(--muted);
-      }
-      .skill-bar {
-        height: 6px;
-        background: var(--green-soft);
-        border-radius: 999px;
-        overflow: hidden;
-        position: relative;
-      }
-      .skill-fill {
-        height: 100%;
-        width: 0;
-        border-radius: 999px;
-        background: var(--grad);
-        background-size: 200% 200%;
-        animation: gradientShift 3s ease infinite;
-        transition: width 1.6s cubic-bezier(0.19, 1, 0.22, 1);
-        position: relative;
-      }
-      .skill-fill.animate {
-        width: var(--w);
-      }
-      .skill-fill::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-        animation: shimmer 2.6s infinite;
-      }
-      @keyframes shimmer {
-        0% {
-          transform: translateX(-100%);
-        }
-        100% {
-          transform: translateX(100%);
-        }
-      }
-
-      .tag-list {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 48px;
-      }
-      .skill-tag {
-        padding: 8px 14px;
-        border: 1px solid var(--border);
-        border-radius: 10px;
-        font-size: 12.5px;
-        color: var(--text);
-        background: var(--surface);
-        transition: all 0.3s ease;
-        cursor: default;
-        font-family: "JetBrains Mono", monospace;
-      }
-      .skill-tag:hover {
-        border-color: var(--green-3);
-        color: var(--green-3);
-        transform: translateY(-3px);
-        box-shadow: 0 12px 22px -12px var(--green-3);
-      }
-
-      .marquee {
-        overflow: hidden;
-        padding: 24px 0;
-        margin-top: 64px;
-        border-top: 1px dashed var(--border);
-        border-bottom: 1px dashed var(--border);
-        mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
-        -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
-      }
-      .marquee-track {
-        display: flex;
-        gap: 50px;
-        width: max-content;
-        animation: scrollX 26s linear infinite;
-      }
-      .marquee-track span {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 20px;
-        color: var(--green-3);
-        font-weight: 500;
-        opacity: 0.6;
-        white-space: nowrap;
-      }
-      @keyframes scrollX {
-        to {
-          transform: translateX(-50%);
-        }
-      }
-
-      .stack-wrap {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 24px;
-      }
-      .stack-col {
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        background: var(--surface);
-        padding: 28px;
-        position: relative;
-        overflow: hidden;
-        transition: all 0.4s ease;
-      }
-      .stack-col:hover {
-        border-color: var(--green-3);
-        transform: translateY(-6px);
-        box-shadow: var(--shadow);
-      }
-      .stack-col::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 3px;
-        width: 100%;
-        background: var(--grad);
-        background-size: 200% 200%;
-        animation: gradientShift 5s ease infinite;
-      }
-      .stack-col h4 {
-        font-family: "Space Grotesk", sans-serif;
-        font-size: 16px;
-        margin-bottom: 18px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-      .stack-col h4 .ic {
-        width: 30px;
-        height: 30px;
-        border-radius: 8px;
-        background: var(--grad);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-size: 11px;
-        font-weight: 700;
-        font-family: "JetBrains Mono", monospace;
-        background-size: 200% 200%;
-        animation: gradientShift 4s ease infinite;
-      }
-      .stack-list {
-        list-style: none;
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-      .stack-list li {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 12px;
-        padding: 6px 12px;
-        border-radius: 8px;
-        background: var(--surface-2);
-        color: var(--green-3);
-        border: 1px solid transparent;
-        transition: all 0.3s ease;
-      }
-      .stack-list li:hover {
-        border-color: var(--green-3);
-        background: #fff;
-        transform: translateY(-2px);
-      }
-
-      .work-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-        gap: 24px;
-      }
-      .work-card {
-        background: var(--surface);
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        overflow: hidden;
-        transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-        cursor: pointer;
-        position: relative;
-        transform-style: preserve-3d;
-      }
-      .work-card::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 20px;
-        padding: 1.5px;
-        background: var(--grad);
-        background-size: 200% 200%;
-        -webkit-mask:
-          linear-gradient(#000 0 0) content-box,
-          linear-gradient(#000 0 0);
-        -webkit-mask-composite: xor;
-        mask:
-          linear-gradient(#000 0 0) content-box,
-          linear-gradient(#000 0 0);
-        mask-composite: exclude;
-        opacity: 0;
-        transition: opacity 0.4s ease;
-        animation: gradientShift 5s ease infinite;
-        pointer-events: none;
-      }
-      .work-card:hover::before {
-        opacity: 1;
-      }
-      .work-card:hover {
-        box-shadow: var(--shadow);
-      }
-      .work-thumb {
-        height: 190px;
-        background: var(--grad-soft);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: "JetBrains Mono", monospace;
-        font-size: 20px;
-        color: var(--green-3);
-        font-weight: 700;
-        position: relative;
-        overflow: hidden;
-      }
-      .work-thumb::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.65), transparent);
-        transform: translateX(-100%);
-        transition: transform 0.9s ease;
-      }
-      .work-card:hover .work-thumb::before {
-        transform: translateX(100%);
-      }
-      .work-body {
-        padding: 24px;
-      }
-      .work-body h3 {
-        font-size: 17px;
-        font-weight: 600;
-        margin-bottom: 6px;
-      }
-      .work-body span {
-        font-size: 13px;
-        color: var(--muted);
-      }
-      .work-tags {
-        display: flex;
-        gap: 6px;
-        margin-top: 14px;
-        flex-wrap: wrap;
-      }
-      .work-tags span {
-        font-size: 11px;
-        padding: 4px 10px;
-        border-radius: 8px;
-        background: var(--green-soft);
-        color: var(--green-3);
-        font-weight: 500;
-        font-family: "JetBrains Mono", monospace;
-      }
-
-      .services-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 24px;
-      }
-      .service {
-        padding: 32px;
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        background: var(--surface);
-        transition: all 0.4s ease;
-        position: relative;
-        overflow: hidden;
-      }
-      .service::after {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 0;
-        height: 3px;
-        width: 0;
-        background: var(--grad);
-        transition: width 0.5s ease;
-      }
-      .service:hover::after {
-        width: 100%;
-      }
-      .service:hover {
-        border-color: var(--green-3);
-        transform: translateY(-6px);
-        box-shadow: var(--shadow);
-      }
-      .service .num {
-        font-family: "JetBrains Mono", monospace;
-        font-size: 13px;
-        margin-bottom: 16px;
-        background: var(--grad);
-        background-size: 200% 200%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        color: transparent;
-        font-weight: 700;
-        animation: gradientShift 4s ease infinite;
-      }
-      .service h3 {
-        font-size: 17px;
-        margin-bottom: 10px;
-        font-weight: 600;
-      }
-      .service p {
-        color: var(--muted);
-        font-size: 14px;
-      }
-
-      .timeline {
-        position: relative;
-        padding-left: 32px;
-      }
-      .timeline::before {
-        content: "";
-        position: absolute;
-        left: 6px;
-        top: 8px;
-        bottom: 8px;
-        width: 2px;
-        background: linear-gradient(to bottom, var(--green-3), transparent);
-      }
-      .tl-item {
-        position: relative;
-        padding-bottom: 48px;
-      }
-      .tl-item:last-child {
-        padding-bottom: 0;
-      }
-      .tl-dot {
-        position: absolute;
-        left: -32px;
-        top: 6px;
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        background: var(--surface);
-        border: 3px solid var(--green-3);
-        animation: pulseDot 2.4s ease-in-out infinite;
-      }
-      @keyframes pulseDot {
-        0%,
-        100% {
-          box-shadow: 0 0 0 4px rgba(5, 150, 105, 0.2);
-        }
-        50% {
-          box-shadow: 0 0 0 12px rgba(5, 150, 105, 0);
-        }
-      }
-      .tl-date {
-        font-size: 12px;
-        color: var(--green-3);
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        font-weight: 600;
-        margin-bottom: 6px;
-        font-family: "JetBrains Mono", monospace;
-      }
-      .tl-item h3 {
-        font-size: 17px;
-        font-weight: 600;
-        margin-bottom: 4px;
-      }
-      .tl-item .place {
-        font-size: 13px;
-        color: var(--muted);
-        margin-bottom: 10px;
-      }
-      .tl-item p {
-        font-size: 14px;
-        color: var(--muted);
-      }
-
-      .cert-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 20px;
-        margin-top: 64px;
-      }
-      .cert {
-        display: flex;
-        gap: 16px;
-        padding: 22px;
-        border: 1px solid var(--border);
-        border-radius: 16px;
-        background: var(--surface);
-        transition: all 0.4s ease;
-        align-items: flex-start;
-      }
-      .cert:hover {
-        border-color: var(--green-3);
-        transform: translateY(-4px);
-        box-shadow: var(--shadow);
-      }
-      .cert-icon {
-        flex-shrink: 0;
-        width: 44px;
-        height: 44px;
-        border-radius: 12px;
-        background: var(--grad);
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 11px;
-        font-weight: 700;
-        font-family: "JetBrains Mono", monospace;
-        background-size: 200% 200%;
-        animation: gradientShift 4s ease infinite;
-      }
-      .cert h4 {
-        font-size: 15px;
-        font-weight: 600;
-        margin-bottom: 4px;
-      }
-      .cert span {
-        font-size: 12px;
-        color: var(--muted);
-      }
-
-      .testi-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 24px;
-      }
-      .testi {
-        padding: 32px;
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        background: var(--surface);
-        transition: all 0.3s ease;
-      }
-      .testi:hover {
-        transform: translateY(-4px);
-        box-shadow: var(--shadow);
-        border-color: var(--green-3);
-      }
-      .testi p {
-        color: var(--text);
-        font-size: 15px;
-        margin-bottom: 20px;
-        font-style: italic;
-      }
-      .testi .who {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-      }
-      .testi .who .ava {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: var(--grad);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        font-weight: 600;
-        font-size: 14px;
-        background-size: 200% 200%;
-        animation: gradientShift 4s ease infinite;
-      }
-      .testi .who span {
-        font-size: 13px;
-        color: var(--muted);
-      }
-
-      .contact-box {
-        border: 1px solid var(--border);
-        border-radius: 24px;
-        padding: 64px 40px;
-        text-align: center;
-        background: var(--grad-soft);
-        position: relative;
-        overflow: hidden;
-      }
-      .contact-box::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(circle at 20% 30%, rgba(5, 150, 105, 0.18), transparent 42%), radial-gradient(circle at 80% 70%, rgba(20, 184, 166, 0.18), transparent 42%);
-        animation: float 12s ease-in-out infinite;
-      }
-      .contact-box h2 {
-        font-family: "Space Grotesk", sans-serif;
-        font-size: clamp(26px, 4vw, 38px);
-        margin-bottom: 16px;
-        letter-spacing: -1px;
-        position: relative;
-      }
-      .contact-box p {
-        color: var(--muted);
-        margin-bottom: 32px;
-        position: relative;
-      }
-      .contact-box .cta-group {
-        justify-content: center;
-        position: relative;
-      }
-
-      footer {
-        border-top: 1px solid var(--border);
-        padding: 40px 0;
-        margin-top: 40px;
-        background: var(--surface);
-      }
-      .footer-inner {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 16px;
-        font-size: 13px;
-        color: var(--muted);
-      }
-      .socials {
-        display: flex;
-        gap: 18px;
-      }
-      .socials a {
-        transition: all 0.3s ease;
-      }
-      .socials a:hover {
-        color: var(--green-3);
-        transform: translateY(-2px);
-        display: inline-block;
-      }
-
-      .progress-bar {
-        position: fixed;
-        top: 0;
-        left: 0;
-        height: 3px;
-        width: 0;
-        z-index: 200;
-        background: var(--grad);
-        background-size: 200% 200%;
-        animation: gradientShift 3s ease infinite;
-        transition: width 0.1s linear;
-      }
-
-      @media (max-width: 900px) {
-        .hero-grid,
-        .about-grid,
-        .stack-wrap {
-          grid-template-columns: 1fr;
-          gap: 48px;
-        }
-        .nav-links {
-          display: none;
-        }
-        section {
-          padding: 80px 0;
-        }
-        .about-stats {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="progress-bar" id="progress"></div>
-
-    <div class="bg-blobs">
-      <div class="blob b1"></div>
-      <div class="blob b2"></div>
-      <div class="blob b3"></div>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg sticky-top py-3">
+  <div class="container">
+    <a class="navbar-brand fs-4" href="#"><i class="bi bi-egg-fried me-1"></i>Resep<span>Ku</span></a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <i class="bi bi-list text-white fs-2"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+        <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="#resep">Resep</a></li>
+        <li class="nav-item"><a class="nav-link" href="#kategori">Kategori</a></li>
+        <li class="nav-item"><a class="nav-link" href="#tentang">Tentang</a></li>
+        <li class="nav-item ms-lg-3"><a class="btn btn-green rounded-pill px-4" href="#resep">Cari Resep</a></li>
+      </ul>
     </div>
-    <div class="bg-grid"></div>
+  </div>
+</nav>
 
-    <nav id="nav">
-      <div class="container nav-inner">
-        <div class="logo">
-          <div class="logo-mark">{;}</div>
-          Dwi<span>.</span>
+<!-- HERO -->
+<header class="hero py-5" id="home">
+  <div class="container py-4 py-lg-5 position-relative" style="z-index:1">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="badge badge-soft rounded-pill px-3 py-2 mb-3"><i class="bi bi-stars me-1"></i>Masak Mudah Setiap Hari</span>
+        <h1 class="display-4 fw-bold lh-sm mb-3">Resep Sederhana,<br>Rasa <span style="color:var(--green-300)">Istimewa</span></h1>
+        <p class="fs-5 mb-4" style="color:#d6f0e3;max-width:520px">
+          Temukan resep makanan rumahan yang praktis, bahan mudah didapat, dan cocok untuk pemula. Masak jadi menyenangkan!
+        </p>
+        <div class="d-flex flex-wrap gap-3 mb-4">
+          <a href="#resep" class="btn btn-light btn-lg rounded-pill px-4 fw-semibold" style="color:var(--green-900)">
+            <i class="bi bi-book me-1"></i> Lihat Resep
+          </a>
+          <a href="#kategori" class="btn btn-outline-light btn-lg rounded-pill px-4">Jelajahi Kategori</a>
         </div>
-        <div class="nav-links">
-          <a href="#about">About</a>
-          <a href="#skills">Skills</a>
-          <a href="#stack">Expertise</a>
-          <a href="#work">Work</a>
-          <a href="#experience">Experience</a>
-          <a href="#contact">Contact</a>
+        <div class="d-flex gap-4 pt-2">
+          <div><div class="fs-4 fw-bold">120+</div><small style="color:#bfe4d2">Resep Pilihan</small></div>
+          <div><div class="fs-4 fw-bold">30 Menit</div><small style="color:#bfe4d2">Rata-rata Masak</small></div>
+          <div><div class="fs-4 fw-bold">4.9★</div><small style="color:#bfe4d2">Rating Pengguna</small></div>
         </div>
       </div>
-    </nav>
+      <div class="col-lg-6 text-center">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=900&q=80"
+             alt="Makanan sehat" class="img-fluid rounded-4 shadow-lg" style="max-height:420px;object-fit:cover;">
+      </div>
+    </div>
+  </div>
+</header>
 
-    <header class="hero">
-      <div class="container hero-grid">
-        <div data-aos="fade-up">
-          <div class="badge"><span class="dot"></span> Open for research & policy analyst roles</div>
-          <h1>Public Analyst & Research Analyst yang <span class="grad">mengubah data menjadi kebijakan berbasis bukti</span>.</h1>
-          <span class="typed"><span id="typed-text"></span><span class="cursor"></span></span>
-          <p class="lead">Berpengalaman dalam metode penelitian, analisis data, dan pengelolaan data strategis — dari pengumpulan hingga penyusunan insight untuk pengambilan keputusan.</p>
-          <div class="cta-group">
-            <a href="#work" class="btn btn-primary">Lihat Riset & Proyek →</a>
-            <a href="#contact" class="btn btn-ghost">Hubungi Saya</a>
+<!-- KATEGORI -->
+<section id="kategori" class="py-5">
+  <div class="container py-4">
+    <div class="text-center mb-5">
+      <h2 class="section-title d-inline-block">Kategori Masakan</h2>
+      <p class="text-muted mt-3">Pilih sesuai selera dan waktu yang kamu punya</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-6 col-md-3">
+        <div class="card card-resep text-center p-4 align-items-center">
+          <div class="rounded-circle d-flex align-items-center justify-content-center mb-3" style="width:64px;height:64px;background:var(--green-100);color:var(--green-700)">
+            <i class="bi bi-sunrise fs-2"></i>
           </div>
-        </div>
-
-        <div class="avatar-wrap" data-aos="fade-up" data-aos-delay="200">
-          <div class="terminal">
-            <div class="terminal-bar">
-              <span class="dot red"></span>
-              <span class="dot yellow"></span>
-              <span class="dot green"></span>
-              <span class="title">dwiramadhan665@gmail.com ~ portfolio</span>
-            </div>
-            <div class="terminal-body">
-              <div class="term-line"><span class="prompt">$</span> <span class="cmd">whoami</span></div>
-              <div class="term-line"><span class="str">→ Public Analyst · Research Analyst</span></div>
-              <div class="term-line"><span class="prompt">$</span> <span class="cmd">cat</span> <span class="flag">skills.json</span></div>
-              <div class="term-line">{ <span class="key">"research"</span>: [<span class="str">"Research Methods"</span>, <span class="str">"Data Collection"</span>, <span class="str">"Policy Analysis"</span>],</div>
-              <div class="term-line">&nbsp;&nbsp;<span class="key">"analysis"</span>: [<span class="str">"SPSS"</span>, <span class="str">"Microsoft Office"</span>, <span class="str">"Data Interpretation"</span>],</div>
-              <div class="term-line">&nbsp;&nbsp;<span class="key">"domain"</span>: [<span class="str">"University Rankings"</span>, <span class="str">"Development Policy"</span>, <span class="str">"Strategic Insight"</span>] }</div>
-              <div class="term-line"><span class="cmt">// siap ubah data jadi kebijakan berbasis bukti 📊</span></div>
-            </div>
-          </div>
-          <div class="float-card">
-            <div class="ic">{ }</div>
-            <div>
-              <strong>5+</strong>
-              Proyek Riset & Analisis
-            </div>
-          </div>
+          <h6 class="fw-bold mb-1">Sarapan</h6>
+          <small class="text-muted">24 resep</small>
         </div>
       </div>
-    </header>
-
-    <section id="about">
-      <div class="container about-grid">
-        <div data-aos="fade-up">
-          <span class="section-tag">// about</span>
-          <h2 class="section-title">Dari data mentah menjadi kebijakan strategis.</h2>
-        </div>
-        <div data-aos="fade-up" data-aos-delay="150">
-          <p>
-            Saya Dwi Ramadhan, Public Analyst & Research Analyst dengan latar belakang Ilmu Administrasi Publik (GPA 3,90/4,00) dari Universitas Indonesia. Saya berpengalaman dalam metode penelitian kuantitatif, analisis data, dan evaluasi
-            kebijakan publik.
-          </p>
-          <p>
-            Pengalaman saya mencakup peran sebagai Cluster Assistant di UI, pengelolaan data peringkat universitas, hingga analisis data untuk kebijakan pembangunan. Saya terbiasa menggunakan SPSS dan Microsoft Office untuk analisis data
-            kompleks dan menghasilkan insight yang bernilai.
-          </p>
-          <div class="about-stats">
-            <div class="stat">
-              <div class="num">3.90</div>
-              <span>IPK / 4.00</span>
-            </div>
-            <div class="stat">
-              <div class="num">30+</div>
-              <span>Institusi Dianalisis</span>
-            </div>
-            <div class="stat">
-              <div class="num">1000+</div>
-              <span>Respons Kualitatif</span>
-            </div>
+      <div class="col-6 col-md-3">
+        <div class="card card-resep text-center p-4 align-items-center">
+          <div class="rounded-circle d-flex align-items-center justify-content-center mb-3" style="width:64px;height:64px;background:var(--green-100);color:var(--green-700)">
+            <i class="bi bi-bowl-hot fs-2"></i>
           </div>
+          <h6 class="fw-bold mb-1">Makan Siang</h6>
+          <small class="text-muted">38 resep</small>
         </div>
       </div>
-    </section>
-
-    <section id="skills" style="background: var(--surface)">
-      <div class="container">
-        <div class="section-head" data-aos="fade-up">
-          <span class="section-tag">// skills</span>
-          <h2 class="section-title">Kemampuan teknis & analitis.</h2>
-        </div>
-        <div class="skills-grid">
-          <div data-aos="fade-up">
-            <div class="skill-item">
-              <div class="skill-top"><span>Public Policy Analysis</span><span>95%</span></div>
-              <div class="skill-bar"><div class="skill-fill" style="--w: 95%"></div></div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-top"><span>Quantitative Research Methods</span><span>92%</span></div>
-              <div class="skill-bar"><div class="skill-fill" style="--w: 92%"></div></div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-top"><span>Data Analytics (SPSS, Excel)</span><span>90%</span></div>
-              <div class="skill-bar"><div class="skill-fill" style="--w: 90%"></div></div>
-            </div>
+      <div class="col-6 col-md-3">
+        <div class="card card-resep text-center p-4 align-items-center">
+          <div class="rounded-circle d-flex align-items-center justify-content-center mb-3" style="width:64px;height:64px;background:var(--green-100);color:var(--green-700)">
+            <i class="bi bi-moon-stars fs-2"></i>
           </div>
-          <div data-aos="fade-up" data-aos-delay="150">
-            <div class="skill-item">
-              <div class="skill-top"><span>Policy Evaluation</span><span>88%</span></div>
-              <div class="skill-bar"><div class="skill-fill" style="--w: 88%"></div></div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-top"><span>Survey Logic Programming (LimeSurvey)</span><span>85%</span></div>
-              <div class="skill-bar"><div class="skill-fill" style="--w: 85%"></div></div>
-            </div>
-            <div class="skill-item">
-              <div class="skill-top"><span>Data Cleansing & Coding</span><span>90%</span></div>
-              <div class="skill-bar"><div class="skill-fill" style="--w: 90%"></div></div>
-            </div>
+          <h6 class="fw-bold mb-1">Makan Malam</h6>
+          <small class="text-muted">31 resep</small>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="card card-resep text-center p-4 align-items-center">
+          <div class="rounded-circle d-flex align-items-center justify-content-center mb-3" style="width:64px;height:64px;background:var(--green-100);color:var(--green-700)">
+            <i class="bi bi-cup-hot fs-2"></i>
           </div>
+          <h6 class="fw-bold mb-1">Camilan</h6>
+          <small class="text-muted">27 resep</small>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="tag-list" data-aos="fade-up">
-          <span class="skill-tag">SPSS</span>
-          <span class="skill-tag">Microsoft Office</span>
-          <span class="skill-tag">LimeSurvey</span>
-          <span class="skill-tag">Data Cleansing</span>
-          <span class="skill-tag">Survey Design</span>
-          <span class="skill-tag">Policy Brief</span>
-          <span class="skill-tag">Stakeholder Engagement</span>
-          <span class="skill-tag">Project Management</span>
-        </div>
+<!-- DAFTAR RESEP -->
+<section id="resep" class="py-5" style="background:var(--green-100)">
+  <div class="container py-4">
+    <div class="d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+      <div>
+        <h2 class="section-title">Resep Populer</h2>
+        <p class="text-muted mt-3 mb-0">Pilihan resep sederhana favorit keluarga</p>
+      </div>
+      <div class="d-flex flex-wrap gap-2">
+        <button class="btn filter-btn active">Semua</button>
+        <button class="btn filter-btn">Ayam</button>
+        <button class="btn filter-btn">Sayur</button>
+        <button class="btn filter-btn">Telur</button>
+        <button class="btn filter-btn">Mie</button>
+      </div>
+    </div>
 
-        <div class="marquee">
-          <div class="marquee-track">
-            <span>Public Policy</span><span>•</span><span>Research Methods</span><span>•</span><span>Data Analysis</span><span>•</span> <span>SPSS</span><span>•</span><span>Policy Evaluation</span><span>•</span><span>Survey Design</span
-            ><span>•</span> <span>LimeSurvey</span><span>•</span><span>Data Visualization</span><span>•</span><span>Stakeholder Engagement</span><span>•</span> <span>Public Policy</span><span>•</span><span>Research Methods</span
-            ><span>•</span><span>Data Analysis</span><span>•</span> <span>SPSS</span><span>•</span><span>Policy Evaluation</span><span>•</span><span>Survey Design</span><span>•</span> <span>LimeSurvey</span><span>•</span
-            ><span>Data Visualization</span><span>•</span><span>Stakeholder Engagement</span><span>•</span>
+    <div class="row g-4">
+      <!-- Card 1 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card card-resep">
+          <div class="thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=800&q=80" class="w-100" alt="Ayam Kecap">
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex gap-2 mb-3 flex-wrap">
+              <span class="tag">Ayam</span><span class="tag">30 Menit</span>
+            </div>
+            <h5 class="fw-bold mb-2">Ayam Kecap Manis</h5>
+            <p class="text-muted mb-3" style="font-size:.92rem">Ayam gurih berbalut kecap manis, cocok untuk lauk makan siang praktis.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="meta"><i class="bi bi-people me-1"></i>2 porsi · <i class="bi bi-fire me-1"></i>Mudah</span>
+              <button class="btn btn-sm btn-green rounded-pill px-3"
+                data-bs-toggle="modal" data-bs-target="#modalResep"
+                data-judul="Ayam Kecap Manis"
+                data-gambar="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?auto=format&fit=crop&w=1200&q=80"
+                data-desc="Ayam kecap manis adalah lauk rumahan favorit yang praktis dan menggugah selera. Perpaduan gurih ayam, manis kecap, dan aroma bawang membuat hidangan ini cocok disajikan bersama nasi hangat untuk makan siang keluarga."
+                data-waktu="30 Menit" data-porsi="2 Orang" data-kesulitan="Mudah" data-kalori="320 kcal"
+                data-bahan="500 gram ayam (potong)|4 siung bawang putih (cincang)|5 siung bawang merah (iris)|3 sdm kecap manis|1 sdm saus tiram|1 sdt garam|½ sdt merica|1 ruas jahe (geprek)|200 ml air|Minyak goreng secukupnya"
+                data-langkah="Panaskan minyak, tumis bawang putih, bawang merah, dan jahe hingga harum|Masukkan potongan ayam, masak hingga berubah warna|Tambahkan kecap manis, saus tiram, garam, dan merica. Aduk rata|Tuang air, masak api kecil hingga ayam matang dan kuah menyusut|Angkat dan sajikan hangat bersama nasi dan lalapan">Lihat</button>
+            </div>
           </div>
         </div>
       </div>
-    </section>
 
-    <section id="stack">
-      <div class="container">
-        <div class="section-head" data-aos="fade-up">
-          <span class="section-tag">// expertise</span>
-          <h2 class="section-title">Bidang keahlian & tools.</h2>
+      <!-- Card 2 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card card-resep">
+          <div class="thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80" class="w-100" alt="Salad Sayur">
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex gap-2 mb-3 flex-wrap">
+              <span class="tag">Sayur</span><span class="tag">15 Menit</span>
+            </div>
+            <h5 class="fw-bold mb-2">Salad Sayur Segar</h5>
+            <p class="text-muted mb-3" style="font-size:.92rem">Campuran sayuran segar dengan dressing lemon, sehat dan menyegarkan.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="meta"><i class="bi bi-people me-1"></i>2 porsi · <i class="bi bi-fire me-1"></i>Sangat Mudah</span>
+              <button class="btn btn-sm btn-green rounded-pill px-3"
+                data-bs-toggle="modal" data-bs-target="#modalResep"
+                data-judul="Salad Sayur Segar"
+                data-gambar="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1200&q=80"
+                data-desc="Salad sayur segar dengan dressing lemon yang menyegarkan. Cocok untuk menu sehat harian, praktis dibuat dalam 15 menit."
+                data-waktu="15 Menit" data-porsi="2 Orang" data-kesulitan="Sangat Mudah" data-kalori="150 kcal"
+                data-bahan="100 gram selada|1 buah tomat (potong)|½ buah timun (iris)|½ buah wortel (serut)|2 sdm olive oil|1 sdm air lemon|¼ sdt garam|¼ sdt lada"
+                data-langkah="Cuci dan potong semua sayuran|Campur dalam mangkuk besar|Buat dressing dari olive oil, air lemon, garam, dan lada|Tuang dressing ke sayuran, aduk rata|Sajikan segera">Lihat</button>
+            </div>
+          </div>
         </div>
-        <div class="stack-wrap">
-          <div class="stack-col" data-aos="fade-up">
-            <h4><span class="ic">RS</span> Research</h4>
-            <ul class="stack-list">
-              <li>Quantitative Methods</li>
-              <li>Qualitative Methods</li>
-              <li>Literature Review</li>
-              <li>Survey Design</li>
-              <li>Hypothesis Testing</li>
-              <li>Policy Analysis</li>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card card-resep">
+          <div class="thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=800&q=80" class="w-100" alt="Telur Dadar">
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex gap-2 mb-3 flex-wrap">
+              <span class="tag">Telur</span><span class="tag">10 Menit</span>
+            </div>
+            <h5 class="fw-bold mb-2">Telur Dadar Spesial</h5>
+            <p class="text-muted mb-3" style="font-size:.92rem">Telur dadar tebal dengan irisan bawang dan cabai, favorit sarapan.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="meta"><i class="bi bi-people me-1"></i>1 porsi · <i class="bi bi-fire me-1"></i>Sangat Mudah</span>
+              <button class="btn btn-sm btn-green rounded-pill px-3"
+                data-bs-toggle="modal" data-bs-target="#modalResep"
+                data-judul="Telur Dadar Spesial"
+                data-gambar="https://images.unsplash.com/photo-1482049016688-2d3e1b311543?auto=format&fit=crop&w=1200&q=80"
+                data-desc="Telur dadar tebal dengan irisan bawang dan cabai, favorit sarapan yang cepat dibuat dan mengenyangkan."
+                data-waktu="10 Menit" data-porsi="1 Orang" data-kesulitan="Sangat Mudah" data-kalori="210 kcal"
+                data-bahan="3 butir telur|2 siung bawang merah (iris)|1 batang daun bawang (iris)|1 buah cabai (iris, optional)|¼ sdt garam|¼ sdt lada|1 sdm minyak"
+                data-langkah="Kocok telur bersama garam dan lada|Masukkan bawang merah, daun bawang, dan cabai|Panaskan minyak di wajan|Tuang adonan telur, masak hingga kedua sisi matang|Angkat dan sajikan">Lihat</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card card-resep">
+          <div class="thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=800&q=80" class="w-100" alt="Mie Goreng">
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex gap-2 mb-3 flex-wrap">
+              <span class="tag">Mie</span><span class="tag">20 Menit</span>
+            </div>
+            <h5 class="fw-bold mb-2">Mie Goreng Rumahan</h5>
+            <p class="text-muted mb-3" style="font-size:.92rem">Mie goreng sederhana dengan sayuran dan telur, rasa nikmat.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="meta"><i class="bi bi-people me-1"></i>2 porsi · <i class="bi bi-fire me-1"></i>Mudah</span>
+              <button class="btn btn-sm btn-green rounded-pill px-3"
+                data-bs-toggle="modal" data-bs-target="#modalResep"
+                data-judul="Mie Goreng Rumahan"
+                data-gambar="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=1200&q=80"
+                data-desc="Mie goreng rumahan dengan bumbu sederhana, sayuran, dan telur. Cocok untuk menu praktis sehari-hari."
+                data-waktu="20 Menit" data-porsi="2 Orang" data-kesulitan="Mudah" data-kalori="380 kcal"
+                data-bahan="2 bungkus mie instan|1 butir telur|50 gram sawi (iris)|2 siung bawang putih (cincang)|1 sdm kecap manis|1 sdm saus|Minyak secukupnya|Air secukupnya"
+                data-langkah="Rebus mie hingga setengah matang, tiriskan|Tumis bawang putih hingga harum, masukkan telur|Masukkan sawi dan mie|Bumbui kecap dan saus, aduk rata|Masak hingga matang, sajikan">Lihat</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card card-resep">
+          <div class="thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=800&q=80" class="w-100" alt="Sup Ayam">
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex gap-2 mb-3 flex-wrap">
+              <span class="tag">Ayam</span><span class="tag">40 Menit</span>
+            </div>
+            <h5 class="fw-bold mb-2">Sup Ayam Bening</h5>
+            <p class="text-muted mb-3" style="font-size:.92rem">Kuah bening hangat dengan ayam dan sayuran, cocok saat cuaca dingin.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="meta"><i class="bi bi-people me-1"></i>4 porsi · <i class="bi bi-fire me-1"></i>Sedang</span>
+              <button class="btn btn-sm btn-green rounded-pill px-3"
+                data-bs-toggle="modal" data-bs-target="#modalResep"
+                data-judul="Sup Ayam Bening"
+                data-gambar="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=80"
+                data-desc="Sup ayam bening dengan kuah gurih dan sayuran segar. Menghangatkan dan cocok untuk seluruh keluarga."
+                data-waktu="40 Menit" data-porsi="4 Orang" data-kesulitan="Sedang" data-kalori="250 kcal"
+                data-bahan="500 gram ayam|1 buah wortel (iris)|1 buah kentang (potong)|2 batang seledri|3 siung bawang putih (cincang)|1 ruas jahe (geprek)|1 sdt garam|½ sdt lada|1 liter air"
+                data-langkah="Rebus ayam hingga mendidih, buang kotoran|Tumis bawang putih dan jahe, masukkan ke rebusan|Masukkan wortel dan kentang|Bumbui garam dan lada|Masak hingga sayuran empuk, tambahkan seledri|Sajikan hangat">Lihat</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card card-resep">
+          <div class="thumb-wrap">
+            <img src="https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?auto=format&fit=crop&w=800&q=80" class="w-100" alt="Tumis Kangkung">
+          </div>
+          <div class="card-body p-4">
+            <div class="d-flex gap-2 mb-3 flex-wrap">
+              <span class="tag">Sayur</span><span class="tag">15 Menit</span>
+            </div>
+            <h5 class="fw-bold mb-2">Tumis Kangkung Bawang</h5>
+            <p class="text-muted mb-3" style="font-size:.92rem">Tumis kangkung dengan bawang putih dan sedikit saus tiram, praktis.</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <span class="meta"><i class="bi bi-people me-1"></i>3 porsi · <i class="bi bi-fire me-1"></i>Sangat Mudah</span>
+              <button class="btn btn-sm btn-green rounded-pill px-3"
+                data-bs-toggle="modal" data-bs-target="#modalResep"
+                data-judul="Tumis Kangkung Bawang"
+                data-gambar="https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?auto=format&fit=crop&w=1200&q=80"
+                data-desc="Tumis kangkung dengan bawang putih dan saus tiram. Sayur praktis yang cocok jadi pelengkap makan."
+                data-waktu="15 Menit" data-porsi="3 Orang" data-kesulitan="Sangat Mudah" data-kalori="120 kcal"
+                data-bahan="1 ikat kangkung|4 siung bawang putih (cincang)|2 buah cabai (iris)|1 sdm saus tiram|¼ sdt garam|¼ sdt gula|Minyak secukupnya"
+                data-langkah="Petik dan cuci kangkung|Tumis bawang putih dan cabai hingga harum|Masukkan kangkung, aduk cepat|Bumbui saus tiram, garam, gula|Masak hingga layu, sajikan">Lihat</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="#" class="btn btn-outline-green btn-lg rounded-pill px-5">Lihat Semua Resep</a>
+    </div>
+  </div>
+</section>
+
+<!-- CARA MEMASAK -->
+<section class="py-5">
+  <div class="container py-4">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <img src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80"
+             alt="Memasak" class="img-fluid rounded-4 shadow" style="max-height:420px;object-fit:cover;width:100%">
+      </div>
+      <div class="col-lg-7">
+        <h2 class="section-title mb-4">Cara Mudah Memasak</h2>
+        <div class="d-flex gap-3 mb-4">
+          <div class="step-num">1</div>
+          <div>
+            <h6 class="fw-bold mb-1">Pilih Resep</h6>
+            <p class="text-muted mb-0">Temukan resep sesuai bahan yang ada di dapur dan waktu yang kamu punya.</p>
+          </div>
+        </div>
+        <div class="d-flex gap-3 mb-4">
+          <div class="step-num">2</div>
+          <div>
+            <h6 class="fw-bold mb-1">Siapkan Bahan</h6>
+            <p class="text-muted mb-0">Ikuti daftar bahan dengan takaran jelas agar hasil masakan konsisten.</p>
+          </div>
+        </div>
+        <div class="d-flex gap-3">
+          <div class="step-num">3</div>
+          <div>
+            <h6 class="fw-bold mb-1">Masak & Sajikan</h6>
+            <p class="text-muted mb-0">Ikuti langkah demi langkah dan sajikan hidangan lezat untuk keluarga.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TENTANG -->
+<section id="tentang" class="py-5">
+  <div class="container">
+    <div class="cta p-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-8">
+          <h2 class="fw-bold mb-3">Masak Lebih Mudah Bersama ResepKu</h2>
+          <p class="mb-0" style="color:#dcf5e8">Kami percaya siapa pun bisa memasak makanan enak dengan resep yang sederhana dan jelas. Mulai dari bahan lokal, hasil istimewa.</p>
+        </div>
+        <div class="col-lg-4 text-lg-end">
+          <a href="#resep" class="btn btn-light btn-lg rounded-pill px-4 fw-semibold" style="color:var(--green-700)">
+            <i class="bi bi-search me-1"></i> Cari Resep
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="py-5" style="background:var(--green-100)">
+  <div class="container py-3">
+    <div class="row justify-content-center">
+      <div class="col-lg-7 text-center">
+        <h3 class="fw-bold mb-2" style="color:var(--green-900)">Dapatkan Resep Baru Setiap Minggu</h3>
+        <p class="text-muted mb-4">Berlangganan gratis, tanpa spam.</p>
+        <form class="d-flex flex-column flex-sm-row gap-2 justify-content-center">
+          <input type="email" class="form-control rounded-pill px-4 py-3" placeholder="Email kamu..." style="max-width:360px">
+          <button class="btn btn-green rounded-pill px-4 py-3 fw-semibold">Berlangganan</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="pt-5 pb-4">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <h5 class="fw-bold text-white"><i class="bi bi-egg-fried me-1"></i>Resep<span style="color:var(--green-300)">Ku</span></h5>
+        <p class="mt-3" style="max-width:320px">Website resep makanan sederhana untuk membantu kamu memasak lebih mudah setiap hari.</p>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6 class="text-white fw-bold mb-3">Menu</h6>
+        <ul class="list-unstyled d-grid gap-2">
+          <li><a href="#home">Home</a></li>
+          <li><a href="#resep">Resep</a></li>
+          <li><a href="#kategori">Kategori</a></li>
+          <li><a href="#tentang">Tentang</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6 class="text-white fw-bold mb-3">Kategori</h6>
+        <ul class="list-unstyled d-grid gap-2">
+          <li><a href="#">Sarapan</a></li>
+          <li><a href="#">Makan Siang</a></li>
+          <li><a href="#">Makan Malam</a></li>
+          <li><a href="#">Camilan</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-4">
+        <h6 class="text-white fw-bold mb-3">Ikuti Kami</h6>
+        <div class="d-flex gap-3 fs-4">
+          <a href="#"><i class="bi bi-instagram"></i></a>
+          <a href="#"><i class="bi bi-facebook"></i></a>
+          <a href="#"><i class="bi bi-youtube"></i></a>
+          <a href="#"><i class="bi bi-tiktok"></i></a>
+        </div>
+      </div>
+    </div>
+    <hr class="border-secondary my-4">
+    <div class="text-center small">© 2026 ResepKu. Semua hak dilindungi.</div>
+  </div>
+</footer>
+
+<!-- ===== MODAL DETAIL RESEP (SATU MODAL UNTUK SEMUA) ===== -->
+<div class="modal fade modal-resep" id="modalResep" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fw-bold" id="mJudul">Detail Resep</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+      </div>
+      <div class="modal-body">
+        <img id="mGambar" src="" alt="Gambar resep" class="detail-img">
+        <div class="detail-scroll">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="tag">Rumahan</span>
+            <span class="tag">Praktis</span>
+          </div>
+          <h3 class="detail-title mb-2" id="mJudulBody">Nama Resep</h3>
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <span class="rating-star"><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i></span>
+            <span class="fw-semibold">4.8</span>
+            <span class="text-muted small">(126 ulasan)</span>
+          </div>
+          <p class="text-muted" id="mDesc"></p>
+
+          <!-- Info pills -->
+          <div class="row g-2 mb-4">
+            <div class="col-6 col-md-3">
+              <div class="info-pill">
+                <i class="bi bi-clock"></i>
+                <div class="label mt-1">Waktu</div>
+                <div class="value" id="mWaktu">-</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="info-pill">
+                <i class="bi bi-people"></i>
+                <div class="label mt-1">Porsi</div>
+                <div class="value" id="mPorsi">-</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="info-pill">
+                <i class="bi bi-fire"></i>
+                <div class="label mt-1">Kesulitan</div>
+                <div class="value" id="mKesulitan">-</div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3">
+              <div class="info-pill">
+                <i class="bi bi-thermometer-half"></i>
+                <div class="label mt-1">Kalori</div>
+                <div class="value" id="mKalori">-</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bahan -->
+          <h5 class="fw-bold mb-3" style="color:var(--green-900)">Bahan-Bahan</h5>
+          <div class="mb-4" id="mBahan"></div>
+
+          <!-- Langkah -->
+          <h5 class="fw-bold mb-3" style="color:var(--green-900)">Cara Membuat</h5>
+          <div class="d-grid gap-2 mb-4" id="mLangkah"></div>
+
+          <!-- Tips -->
+          <div class="tips-box mb-4">
+            <h6 class="fw-bold mb-2" style="color:var(--green-900)"><i class="bi bi-lightbulb me-1"></i>Tips</h6>
+            <ul class="mb-0 small text-muted" style="padding-left:1.1rem">
+              <li>Gunakan bahan segar agar rasa lebih nikmat.</li>
+              <li>Sesuaikan bumbu dengan selera keluarga.</li>
+              <li>Sajikan selagi hangat untuk hasil terbaik.</li>
             </ul>
           </div>
-          <div class="stack-col" data-aos="fade-up" data-aos-delay="100">
-            <h4><span class="ic">DA</span> Data & Analysis</h4>
-            <ul class="stack-list">
-              <li>SPSS</li>
-              <li>Microsoft Excel</li>
-              <li>LimeSurvey</li>
-              <li>Data Cleansing</li>
-              <li>Data Coding</li>
-              <li>Data Visualization</li>
-            </ul>
-          </div>
-          <div class="stack-col" data-aos="fade-up" data-aos-delay="200">
-            <h4><span class="ic">DM</span> Domain</h4>
-            <ul class="stack-list">
-              <li>Public Policy</li>
-              <li>Digital Governance</li>
-              <li>E-Government</li>
-              <li>University Rankings</li>
-              <li>Development Policy</li>
-              <li>HR Management</li>
-            </ul>
-          </div>
-          <div class="stack-col" data-aos="fade-up" data-aos-delay="300">
-            <h4><span class="ic">PM</span> Management</h4>
-            <ul class="stack-list">
-              <li>Project Management</li>
-              <li>Stakeholder Engagement</li>
-              <li>Cross-functional Collaboration</li>
-              <li>Performance Reporting</li>
-              <li>Team Coordination</li>
-              <li>Document Management</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
 
-    <section id="work" style="background: var(--surface)">
-      <div class="container">
-        <div class="section-head" data-aos="fade-up">
-          <span class="section-tag">// portfolio</span>
-          <h2 class="section-title">Proyek riset & analisis terpilih.</h2>
-        </div>
-        <div class="work-grid">
-          <div class="work-card" data-aos="fade-up">
-            <div class="work-thumb">{"project":"bkd-dki-jakarta"}</div>
-            <div class="work-body">
-              <h3>Research Technical Assistant — BKD DKI Jakarta</h3>
-              <span>Analisis Kualifikasi Pendidikan ASN · 2025</span>
-              <div class="work-tags"><span>Data Integration</span><span>Policy Research</span><span>30 Agencies</span></div>
-            </div>
-          </div>
-          <div class="work-card" data-aos="fade-up" data-aos-delay="100">
-            <div class="work-thumb">{"project":"mwa-ui"}</div>
-            <div class="work-body">
-              <h3>Data Analyst — MWA UI</h3>
-              <span>Kebijakan Pengembangan UI 2025-2029 · 2024</span>
-              <div class="work-tags"><span>Data Collection</span><span>Policy Brief</span><span>Indicators</span></div>
-            </div>
-          </div>
-          <div class="work-card" data-aos="fade-up" data-aos-delay="200">
-            <div class="work-thumb">{"project":"tracer-study-ui"}</div>
-            <div class="work-body">
-              <h3>Data Analyst — Tracer Study UI</h3>
-              <span>Employer Study 2026 & QS WUR · 2025-2026</span>
-              <div class="work-tags"><span>LimeSurvey</span><span>Data Cleaning</span><span>Dashboard</span></div>
-            </div>
-          </div>
-          <div class="work-card" data-aos="fade-up" data-aos-delay="300">
-            <div class="work-thumb">{"project":"icg-fia-ui"}</div>
-            <div class="work-body">
-              <h3>Cluster Research Analyst — ICG FIA UI</h3>
-              <span>Literatur Review & Analisis Kebijakan · 2024-Sekarang</span>
-              <div class="work-tags"><span>Meta-Governance</span><span>Digital Divide</span><span>Policy Analysis</span></div>
-            </div>
-          </div>
-          <div class="work-card" data-aos="fade-up" data-aos-delay="400">
-            <div class="work-thumb">{"project":"lppia-fia-ui"}</div>
-            <div class="work-body">
-              <h3>Data Analyst — LPPIA FIA UI</h3>
-              <span>Analisis 1000+ Respons Kualitatif · 2024</span>
-              <div class="work-tags"><span>Qualitative Coding</span><span>Data Description</span><span>40 Institutions</span></div>
-            </div>
-          </div>
-          <div class="work-card" data-aos="fade-up" data-aos-delay="500">
-            <div class="work-thumb">{"project":"biro-trem-ui"}</div>
-            <div class="work-body">
-              <h3>Rankings Analyst — Biro TREM UI</h3>
-              <span>QS WUR, THE WUR, QS Sustainability · 2024</span>
-              <div class="work-tags"><span>Ranking Management</span><span>Benchmarking</span><span>Data Processing</span></div>
+          <!-- Nutrisi -->
+          <h5 class="fw-bold mb-3" style="color:var(--green-900)">Informasi Nutrisi <span class="text-muted fw-normal fs-6">(per porsi)</span></h5>
+          <div class="nutrisi-box mb-2">
+            <div class="row text-center g-3">
+              <div class="col-4 col-md-2"><div class="n-val" id="mKaloriN">-</div><div class="n-lbl">Kalori</div></div>
+              <div class="col-4 col-md-2"><div class="n-val">24g</div><div class="n-lbl">Protein</div></div>
+              <div class="col-4 col-md-2"><div class="n-val">12g</div><div class="n-lbl">Lemak</div></div>
+              <div class="col-4 col-md-2"><div class="n-val">18g</div><div class="n-lbl">Karbo</div></div>
+              <div class="col-4 col-md-2"><div class="n-val">3g</div><div class="n-lbl">Serat</div></div>
+              <div class="col-4 col-md-2"><div class="n-val">420mg</div><div class="n-lbl">Sodium</div></div>
             </div>
           </div>
         </div>
       </div>
-    </section>
-
-    <section id="experience">
-      <div class="container">
-        <div class="section-head" data-aos="fade-up">
-          <span class="section-tag">// experience</span>
-          <h2 class="section-title">Pengalaman profesional & organisasi.</h2>
-        </div>
-
-        <div class="timeline">
-          <div class="tl-item" data-aos="fade-up">
-            <span class="tl-dot"></span>
-            <div class="tl-date">Feb 2025 — Sekarang</div>
-            <h3>Lecturer Assistant — Basic & Advanced Research Method</h3>
-            <div class="place">FIA UI · Depok</div>
-            <p>Membimbing 30+ mahasiswa S1 dalam menyusun proposal riset administrasi, memberikan feedback konstruktif, dan mengoordinasikan sesi tutorial mingguan.</p>
-          </div>
-          <div class="tl-item" data-aos="fade-up" data-aos-delay="100">
-            <span class="tl-dot"></span>
-            <div class="tl-date">Mar 2024 — Sekarang</div>
-            <h3>Cluster Research Analyst</h3>
-            <div class="place">Innovation and Comparative Governance (ICG FIA UI) · Depok</div>
-            <p>Menyusun 3 literatur review tentang meta-governance & digital divide, menulis 5 artikel analitis tentang National Data Center (PDN), dan mengembangkan outline buku "Studi Governansi Kebijakan".</p>
-          </div>
-          <div class="tl-item" data-aos="fade-up" data-aos-delay="200">
-            <span class="tl-dot"></span>
-            <div class="tl-date">Mei 2025 — Jun 2026</div>
-            <h3>Data Analyst — Tracer Study UI</h3>
-            <div class="place">Direktorat Alumni dan Kemahasiswaan UI · Depok</div>
-            <p>Memimpin eksekusi Employer Study 2026, mendesain kuesioner bilingual & logika survei di LimeSurvey, serta menghasilkan analitik untuk Rector Dashboard, akreditasi, dan QS World University Rankings.</p>
-          </div>
-          <div class="tl-item" data-aos="fade-up" data-aos-delay="300">
-            <span class="tl-dot"></span>
-            <div class="tl-date">Mar 2025 — Sekarang</div>
-            <h3>Accreditation Preparation Team</h3>
-            <div class="place">FIA UI · Depok</div>
-            <p>Menyiapkan dokumen akreditasi prodi Administrasi Publik, memetakan output riset dosen sesuai klaster, dan berkoordinasi dengan unit terkait untuk mencapai kriteria "Excellent".</p>
-          </div>
-          <div class="tl-item" data-aos="fade-up" data-aos-delay="400">
-            <span class="tl-dot"></span>
-            <div class="tl-date">Okt — Nov 2025</div>
-            <h3>Research Technical Assistant</h3>
-            <div class="place">BKD DKI Jakarta · Depok</div>
-            <p>Mengintegrasikan dataset kompleks dari 30 instansi pemerintah untuk membangun database rekomendasi pendidikan, mendukung kebijakan HR berbasis bukti di tingkat regional.</p>
-          </div>
-          <div class="tl-item" data-aos="fade-up" data-aos-delay="500">
-            <span class="tl-dot"></span>
-            <div class="tl-date">Mei — Jul 2024</div>
-            <h3>Data Analyst</h3>
-            <div class="place">Majelis Wali Amanat UI (MWA UI) · Depok</div>
-            <p>Mengumpulkan data dari 5 area kunci (pendidikan, ranking, pengabdian, SDM, keuangan, riset, integritas, tata kelola) untuk mendukung pengambilan keputusan kebijakan pengembangan UI 2025-2029.</p>
-          </div>
-          <div class="tl-item" data-aos="fade-up" data-aos-delay="600">
-            <span class="tl-dot"></span>
-            <div class="tl-date">Jul — Agu 2024</div>
-            <h3>Project and Research Development</h3>
-            <div class="place">BINA CITAFIA UI · Bogor</div>
-            <p>Mengembangkan indikator keberhasilan program literasi & numerasi, mendesain survei pra-implementasi dan evaluasi, serta menganalisis data untuk 50+ peserta anak usia 5-15 tahun.</p>
-          </div>
-          <div class="tl-item" data-aos="fade-up" data-aos-delay="700">
-            <span class="tl-dot"></span>
-            <div class="tl-date">Mar — Des 2023</div>
-            <h3>Research and Development Studies</h3>
-            <div class="place">BEM FIA UI 2023 · Depok</div>
-            <p>Mengembangkan studi rekomendasi struktural & kultural untuk Polri, menganalisis data primer & sekunder, dan membuat policy brief untuk mengurangi budaya KKN.</p>
-          </div>
-        </div>
-
-        <div class="cert-grid">
-          <div class="cert" data-aos="fade-up">
-            <div class="cert-icon">IPK</div>
-            <div>
-              <h4>GPA 3.90 / 4.00</h4>
-              <span>Universitas Indonesia · 2022-Sekarang</span>
-            </div>
-          </div>
-          <div class="cert" data-aos="fade-up" data-aos-delay="100">
-            <div class="cert-icon">SPSS</div>
-            <div>
-              <h4>Statistical Analysis with SPSS</h4>
-              <span>Quantitative Research · 2024</span>
-            </div>
-          </div>
-          <div class="cert" data-aos="fade-up" data-aos-delay="200">
-            <div class="cert-icon">LS</div>
-            <div>
-              <h4>Survey Logic Programming</h4>
-              <span>LimeSurvey · 2025</span>
-            </div>
-          </div>
-          <div class="cert" data-aos="fade-up" data-aos-delay="300">
-            <div class="cert-icon">PM</div>
-            <div>
-              <h4>Project Management & Stakeholder Engagement</h4>
-              <span>Professional Experience · 2024</span>
-            </div>
-          </div>
-        </div>
+      <div class="modal-footer border-0 px-4 pb-4 pt-0">
+        <button class="btn btn-outline-green rounded-pill px-4" data-bs-dismiss="modal">Tutup</button>
+        <button class="btn btn-green rounded-pill px-4"><i class="bi bi-bookmark-plus me-1"></i> Simpan Resep</button>
       </div>
-    </section>
+    </div>
+  </div>
+</div>
 
-    <section id="services" style="background: var(--surface)">
-      <div class="container">
-        <div class="section-head" data-aos="fade-up">
-          <span class="section-tag">// services</span>
-          <h2 class="section-title">Yang bisa saya kerjakan.</h2>
-        </div>
-        <div class="services-grid">
-          <div class="service" data-aos="fade-up">
-            <div class="num">01_</div>
-            <h3>Policy Research & Analysis</h3>
-            <p>Menyusun policy brief, analisis kebijakan publik, dan rekomendasi berbasis data untuk pengambilan keputusan strategis.</p>
-          </div>
-          <div class="service" data-aos="fade-up" data-aos-delay="100">
-            <div class="num">02_</div>
-            <h3>Data Collection & Analytics</h3>
-            <p>Desain survei, pengumpulan data, cleansing, coding, analisis statistik dengan SPSS, dan visualisasi data.</p>
-          </div>
-          <div class="service" data-aos="fade-up" data-aos-delay="200">
-            <div class="num">03_</div>
-            <h3>Research & Evaluation</h3>
-            <p>Literature review, evaluasi program, penyusunan indikator kinerja, dan pelaporan hasil riset untuk akreditasi & ranking.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Filter tombol aktif
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
 
-    <section id="testi">
-      <div class="container">
-        <div class="section-head" data-aos="fade-up">
-          <span class="section-tag">// testimonials</span>
-          <h2 class="section-title">Kata mereka.</h2>
-        </div>
-        <div class="testi-grid">
-          <div class="testi" data-aos="fade-up">
-            <p>"Dwi mampu mengolah data kompleks dari puluhan institusi menjadi rekomendasi kebijakan yang actionable. Analisisnya tajam dan terstruktur."</p>
-            <div class="who">
-              <div class="ava">B</div>
-              <span>Tim BKD DKI Jakarta</span>
-            </div>
-          </div>
-          <div class="testi" data-aos="fade-up" data-aos-delay="100">
-            <p>"Kontribusinya pada Tracer Study UI sangat signifikan — mulai dari desain survei hingga analitik untuk Rector Dashboard dan QS WUR."</p>
-            <div class="who">
-              <div class="ava">D</div>
-              <span>Direktorat Alumni UI</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+  // Isi modal saat tombol "Lihat" diklik
+  const modalResep = document.getElementById('modalResep');
+  modalResep.addEventListener('show.bs.modal', function (event) {
+    const btn = event.relatedTarget;
+    if (!btn) return;
 
-    <section id="contact">
-      <div class="container">
-        <div class="contact-box" data-aos="fade-up">
-          <h2>Tertarik berkolaborasi dalam riset & kebijakan?</h2>
-          <p>Terbuka untuk posisi research analyst, policy analyst, data analyst, dan proyek berbasis data-driven policy.</p>
-          <div class="cta-group">
-            <a href="mailto:dwiramadhan665@gmail.com" class="btn btn-primary">Kirim Email</a>
-            <a href="https://wa.me/6285892374868" class="btn btn-ghost" target="_blank">WhatsApp</a>
-          </div>
-        </div>
-      </div>
-    </section>
+    const judul = btn.getAttribute('data-judul') || 'Detail Resep';
+    document.getElementById('mJudul').textContent = judul;
+    document.getElementById('mJudulBody').textContent = judul;
+    document.getElementById('mGambar').src = btn.getAttribute('data-gambar') || '';
+    document.getElementById('mDesc').textContent = btn.getAttribute('data-desc') || '';
+    document.getElementById('mWaktu').textContent = btn.getAttribute('data-waktu') || '-';
+    document.getElementById('mPorsi').textContent = btn.getAttribute('data-porsi') || '-';
+    document.getElementById('mKesulitan').textContent = btn.getAttribute('data-kesulitan') || '-';
+    document.getElementById('mKalori').textContent = btn.getAttribute('data-kalori') || '-';
+    document.getElementById('mKaloriN').textContent = (btn.getAttribute('data-kalori') || '-').replace(' kcal','');
 
-    <footer>
-      <div class="container footer-inner">
-        <div>© 2026 Dwi Ramadhan. Public & Research Analyst.</div>
-        <div class="socials">
-          <a href="https://www.linkedin.com/in/dwi-ramadhan-aa60ba254/" target="_blank">LinkedIn</a>
-          <a href="mailto:dwiramadhan665@gmail.com">Email</a>
-          <a href="https://wa.me/6285892374868" target="_blank">WhatsApp</a>
-        </div>
-      </div>
-    </footer>
+    // Bahan: dipisah "|"
+    const bahanArr = (btn.getAttribute('data-bahan') || '').split('|').filter(Boolean);
+    document.getElementById('mBahan').innerHTML = bahanArr.map(b =>
+      `<div class="bahan-item"><span class="dot"></span>${b.trim()}</div>`
+    ).join('');
 
-    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-    <script>
-      AOS.init({ duration: 700, once: true, offset: 80 });
-
-      const nav = document.getElementById("nav");
-      const progress = document.getElementById("progress");
-      window.addEventListener("scroll", () => {
-        nav.classList.toggle("scrolled", window.scrollY > 20);
-        const h = document.documentElement.scrollHeight - window.innerHeight;
-        progress.style.width = (window.scrollY / h) * 100 + "%";
-      });
-
-      const fills = document.querySelectorAll(".skill-fill");
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            if (e.isIntersecting) {
-              e.target.classList.add("animate");
-              io.unobserve(e.target);
-            }
-          });
-        },
-        { threshold: 0.4 },
-      );
-      fills.forEach((f) => io.observe(f));
-
-      const words = ["Public Policy Analyst", "Research Analyst", "Data Analyst", "Policy Evaluation", "Strategic Insight"];
-      let wi = 0,
-        ci = 0,
-        deleting = false;
-      const el = document.getElementById("typed-text");
-      function type() {
-        const word = words[wi];
-        if (!deleting) {
-          el.textContent = word.substring(0, ci++);
-          if (ci > word.length) {
-            deleting = true;
-            setTimeout(type, 1400);
-            return;
-          }
-        } else {
-          el.textContent = word.substring(0, ci--);
-          if (ci < 0) {
-            deleting = false;
-            wi = (wi + 1) % words.length;
-            ci = 0;
-          }
-        }
-        setTimeout(type, deleting ? 45 : 85);
-      }
-      type();
-
-      document.querySelectorAll(".work-card").forEach((card) => {
-        card.addEventListener("mousemove", (e) => {
-          const r = card.getBoundingClientRect();
-          const x = (e.clientX - r.left) / r.width - 0.5;
-          const y = (e.clientY - r.top) / r.height - 0.5;
-          card.style.transform = `translateY(-8px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg)`;
-        });
-        card.addEventListener("mouseleave", () => {
-          card.style.transform = "";
-        });
-      });
-    </script>
-  </body>
+    // Langkah: dipisah "|"
+    const langkahArr = (btn.getAttribute('data-langkah') || '').split('|').filter(Boolean);
+    document.getElementById('mLangkah').innerHTML = langkahArr.map((l, i) =>
+      `<div class="step-card">
+         <div class="step-num">${i + 1}</div>
+         <div><p class="mb-0 text-muted" style="font-size:.92rem">${l.trim()}</p></div>
+       </div>`
+    ).join('');
+  });
+</script>
+</body>
 </html>
